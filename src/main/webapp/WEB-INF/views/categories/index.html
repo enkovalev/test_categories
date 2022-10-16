@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo menu</title>
+    <style>
+        div {
+            position:relative;
+            left:20px;
+            color:#2b91d2;
+        }
+        summary {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<script th:inline="javascript">
+    let arr = [[${categories}]];
+    level(arr)
+
+    function level(categories) {
+        categories.forEach(function(category, i, categories) {
+            if (category.subCategory.length > 0) {
+                document.writeln("<div>");
+                document.writeln("<details>");
+                document.writeln("<summary>");
+                document.writeln("<a>" + category.name + "</a>");
+                document.writeln("</summary>");
+                level(category.subCategory);
+
+                document.writeln("</details>");
+                document.writeln("</div>");
+            } else {
+                document.writeln("<div style=\"left:36px\">");
+                document.writeln("<a>" + category.name + "</a>");
+                document.writeln("</div>");
+            }
+        });
+    }
+</script>
+</body>
+</html>
